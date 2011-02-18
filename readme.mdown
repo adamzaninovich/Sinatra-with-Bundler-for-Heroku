@@ -1,0 +1,46 @@
+# Sinatra with Bundler for Heroku
+
+Via: [Nathan Humbert's Blog](http://blog.nathanhumbert.com/2011/02/using-sinatra-with-bundler-to-deploy-on.html)
+
+## Running locally
+
+    bundle install
+    rackup
+
+## Deploying to Heroku
+
+    git init
+    git add .
+    git commit -m 'initial commit'
+    heroku create
+    git push heroku master
+
+---
+
+## Basic Setup
+
+### Gemfile
+
+    source :rubygems
+    gem 'sinatra'
+
+### config.ru
+
+    require 'rubygems'
+    require 'bundler'
+    
+    Bundler.require
+    
+    require './application'
+    
+    run Application
+
+### application.rb
+
+    class Application < Sinatra::Base
+      get '/' do
+        'hello'
+      end
+    end
+
+## The End
